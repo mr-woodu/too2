@@ -1,0 +1,155 @@
+body {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+.screen {
+    position: relative;
+    box-shadow: 0px 0px 20px 8px #6f6f6f;
+    height: min(70vh, 75vw);
+    border-radius: 30px;
+}
+
+.screen .bkg {
+    background-color: #000;
+    height: min(70vh, 75vw);
+    border-radius: 30px;
+    width: 100%;
+}
+
+.screen .loader {
+    background-color: #000D;
+    height: 100%;
+    border-radius: 30px;
+    z-index: 9999;
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+
+.loader {
+    font-size: 2rem;
+    color: #FFF;
+    text-align: center;
+    align-content: center;
+}
+
+.screen .anim,
+.screen .hero,
+.screen .path,
+.screen .invent,
+.screen canvas {
+    position: absolute;
+    left:0;
+    top:0
+}
+
+.anim {
+    filter: drop-shadow(0px 0px 5px red);
+}
+
+.hero {
+    xfilter: drop-shadow(0px 0px 5px red);
+    transform-origin: right top;
+    z-index:6
+}
+
+.invent {
+    z-index: 1000;
+    cursor: grab;
+    left: 0;
+}
+
+
+#debug {
+    position: fixed;
+    top: 0;
+    font-size: 60%;
+    max-width: 60%;
+    display: none;
+}
+
+#debug-hack {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    font-size: 60%;
+    padding: 5px;
+    color:chocolate;
+    text-decoration: none;
+    
+}
+
+
+.menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 80px;
+    background-color: white;
+    box-shadow: 0px 0px 0px 1px #0E3F7E08, 0px 1px 1px -0.5px #2A334508, 0px 3px 3px -1.5px #2A334608, 0px 6px 6px -3px #2A334608, 0px 12px 12px -6px #0E3F7E08, 0px 24px 24px -12px #0E3F7E10;
+    display: none;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 10px;
+}
+
+
+img.inventorybox {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    border-radius: 0 0 20px 20px;
+}
+
+.info,
+.talk,
+.desc {
+    position: absolute;
+    text-align: center;
+    color: white;
+    width: 100%;
+    font-family: serif;
+    font-size: 1.5rem;
+    display: flex;
+}
+
+.desc, .talk {
+    top: 30px;
+}
+
+.info {
+    bottom: 140px;
+}
+
+.info>div {
+    width: auto;
+    padding: 5px 20px 5px 20px;
+    margin: auto;
+    z-index: 100;
+}
+
+.talk>div,
+.desc>div {
+    width: auto;
+    padding: 5px 20px 5px 20px;
+    background-color: #FFFFFF99;
+    border-radius: 5px;
+    color: black;
+    z-index: 100;
+}
+
+.desc>div {
+    margin: auto;
+}
+
+.talkX>div {
+    background-color: #ead1a6AA
+}

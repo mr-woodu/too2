@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Imporant meta information to make the page as rigid as possible on mobiles, to avoid unintentional zooming on the page itself  -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TOO2</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+
+    <link rel="stylesheet" href="index.css">
+
+    <script src="js/lib/moment.min.js"></script>
+    <script src="js/lib/jquery-3.5.1.min.js"></script>
+    <script src="js/lib/lodash.min.js"></script>
+    <script src="js/lib/libgif.js"></script>
+    <script src="js/lib/bootstrap.bundle.min.js"></script>
+    <script src="js/lib/jquery-ui.min.js"></script>
+    <script src="js/lib/jquery.cookie.min.js"></script>
+    <script src="js/lib/pathfinding-browser.js"></script>
+
+    <script src="js/animations.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/character.js"></script>
+    <script src="js/screen.js"></script>
+    <script src="js/index.js"></script>
+
+
+
+</head>
+
+<body>
+    <div id="debug"></div>
+    <nav class="menu">
+        <ul class="xnav nav-underline">
+        </ul>
+    </nav>
+    <div class="screen">
+        <img class="bkg">
+        <div class='info'><div></div></div>
+        <div class='desc'><div></div></div>
+        <div class='talk'><div></div></div>
+        <img class="inventorybox" src="data/INVENT/INVENT.png">
+        <div class="loader"></div>
+        <div class="animations"></div>
+        <div class="character"></div>
+    </div>
+    <a id="debug-hack" href='#'>#hck.woodu</a>
+</body>
+
+</html>
+
+<!-- The main Three.js file >
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
+
+ This brings in the ability to load custom 3D objects in the .gltf file format. Blender allows the ability to export to this format out the box 
+<script src='https://cdn.jsdelivr.net/gh/mrdoob/Three.js@r92/examples/js/loaders/GLTFLoader.js'></script>
+-->

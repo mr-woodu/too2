@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dot Matrix Visualization</title>
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+<canvas id="dotMatrixCanvas" width="500" height="500"></canvas>
+<script>
+    // Define your dot matrix size and other necessary variables
+    const matrixSize = 50;
+    const blockSize = 10;
+    const tShapeWidth = 10;
+    const canvas = document.getElementById('dotMatrixCanvas');
+    const ctx = canvas.getContext('2d');
+    const startPixel = [10, 10]; // Change the start and end pixels as needed
+    const endPixel = [40, 40];
+
+    // Example matrix with a T-shape part in the middle
+    const matrix = new Array(matrixSize).fill().map(() => new Array(matrixSize).fill(1));
+    for (let i = (matrixSize - tShapeWidth) / 2; i < (matrixSize + tShapeWidth) / 2; i++) {
+        matrix[i][matrixSize / 2] = 0;
+    }
+    for (let i = (matrixSize - tShapeWidth) / 2; i < (matrixSize + tShapeWidth) / 2; i++) {
+        matrix[matrixSize / 2][i] = 0;
+    }
+
+    // Function to draw the dot matrix
+    function drawMatrix() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < matrixSize; i++) {
+            for (let j = 0; j < matrixSize; j++) {
+                ctx.fillStyle = matrix[i][j] === 1 ? 'black' : 'gray';
+                ctx.fillRect(j * blockSize, i * blockSize, blockSize, blockSize);
+            }
+        }
+    }
+
+    // Function to draw the shortest path
+    function drawPath(path) {
+        ctx.beginPath();
+        ctx.moveTo((startPixel[1] + 0.5) * blockSize, (startPixel[0] + 0.5) * blockSize);
+        for (let i = 1; i < path.length; i++) {
+            ctx.lineTo((path[i][1] + 0.5) * blockSize, (path[i][0] + 0.5) * blockSize);
+        }
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    }
+
+// Function to find the shortest path between two pixels using A* algorithm
+function findShortestPath(matrix, start, end) {
+    // Define the movement directions (vertical and horizontal)
+    const directions = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+
+    // Function to calculate the Manhattan distance between two points
+    function manhattanDistance(a, b) {
+        return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+    }
+
+    // Function to check if a pixel is within the bounds and is usable
+    function isValid(pixel) {
+        const [x, y] = pixel;
+        return x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && matrix[x][y] === 1;
+    }
+
+    // Initialize the open list
+    const openList = [];
+    openList.push([0, start]);
+    // Initialize the closed list
+    const closedSet = new Set();
+    // Initialize the cameFrom dictionary to reconstruct the path
+    const cameFrom = new Map();
+    // Initialize the gScore dictionary to store the cost from start to each node
+    const gScore = new Map();
+    gScore.set(start, 0);
+
+    // Main loop
+    while (openList.length > 0) {
+        // Sort the open list by the total cost
+        openList.sort((a, b) => a[0] - b[0]);
+        const [_, current] = openList.shift();
+
+        if (current[0] === end[0] && current[1] === end[1]) {
+            const path = [];
+            let node = end;
+            while (node) {
+                path.unshift(node);
+                node = cameFrom.get(node);
+            }
+            return path;
+        }
+
+        closedSet.add(current);
+
+        for (const [dx, dy] of directions) {
+            const neighbor = [current[0] + dx, current[1] + dy];
+
+            if (!isValid(neighbor) || closedSet.has(neighbor)) {
+                continue;
+            }
+
+            const tentativeGScore = gScore.get(current) + 1;
+
+            if (!gScore.has(neighbor) || tentativeGScore < gScore.get(neighbor)) {
+                cameFrom.set(neighbor, current);
+                gScore.set(neighbor, tentativeGScore);
+                const priority = tentativeGScore + manhattanDistance(neighbor, end);
+                openList.push([priority, neighbor]);
+            }
+        }
+    }
+
+    return null;
+}
+
+    // Call the drawMatrix function to initially draw the dot matrix
+    drawMatrix();
+
+    // Call the findShortestPath function (which you can implement in JavaScript) and then call drawPath to visualize it
+    const path = findShortestPath(matrix, [10,10], [40,40])
+    drawPath(path);
+</script>
+</body>
+</html>
